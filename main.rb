@@ -27,42 +27,39 @@ def draw?
   end
 end
 
-def player_1_choice_prompt
-  puts "Player_1 make your move"
-  player_1_choice = gets.chomp.to_i
+def invalid_move1
+  if @board[@player_1_choice] == "X" || @board[@player_1_choice] == "0"
+    puts "that spot is already taken"
+    player_1_turn
+  end
 end
 
-def player_2_choice_prompt
-  puts "Player_2 make your move"
-  player_2_choice = gets.chomp.to_i
+def invalid_move2
+  if @board[@player_2_choice] == "X" || @board[@player_2_choice] == "0"
+    puts "that spot is already taken"
+    player_2_turn
+  end
 end
 
 def player_1_turn
-  if @board[player_1_choice] == "X" || @board[player_1_choice] == "0"
-        puts "that spot is already taken"
-        player_1_choice_prompt
-  else
-    @board[player_1_choice] = "X"
-  end
-  board
+  puts "Player_1 make your move"
+  @player_1_choice = gets.chomp.to_i
+  @board[@player_1_choice] = "X" unless invalid_move1
   @player_choice = "X"
   @turns += 1
   win?
   draw?
+  board
 end
 
 def player_2_turn
-  if @board[player_2_choice] == "X" || @board[player_2_choice] == "0"
-        puts "that spot is already taken"
-        player_2_choice_prompt
-  else
-    @board[player_2_choice] = "0"
-  end
-  board
-  @player_choice = "0"
+  puts "Player_2 make your move"
+  @player_2_choice = gets.chomp.to_i
+  @board[@player_2_choice] = "0" unless invalid_move2
   @turns += 1
   win?
   draw?
+  board
 end
 
 puts "Prompt game begin"
